@@ -123,6 +123,8 @@ function  projGNCG(mc,pInv::InverseParam,pMis;indCredit=[],dumpResults::Function
 					  	"i.LS", "F", "R","alpha[1]","Jc/J0","#Active")
 	updateHis!(0,His,Jc,F,Dc,R,alpha[1],countnz(Active),0.0,tMis,tReg)
 	
+	dumpResults(mc,Dc,iter,pInv,pMis)
+  
 	if out>=2; print(outStr); end
 	f = open("jInv.out", "w")
 	write(f, outStr)
@@ -220,7 +222,7 @@ function  projGNCG(mc,pInv::InverseParam,pMis;indCredit=[],dumpResults::Function
 		#  Check stopping criteria for outer iteration. 
 		updateHis!(iter,His,Jc,F,Dc,R,alpha[1],countnz(Active),stepNorm,tMis,tReg)
 	
-		dumpResults(mc,Dc,iter,pInv,pMis);
+		dumpResults(mc,Dc,iter,pInv,pMis)
 		if stepNorm < stepTol
 			outerFlag = 1
 			break
