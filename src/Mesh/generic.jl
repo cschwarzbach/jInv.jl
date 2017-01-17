@@ -134,7 +134,7 @@ end
 	Output:
 		SparseMatrixCSC{Float64,Int64}
 """
-function getdEdgeMassMatrix(M::AbstractMesh,v::Vector)
+function getdEdgeMassMatrix(M::AbstractMesh,sigma::Vector,v::Vector)
    # Derivative
 
 	Ae   = getEdgeAverageMatrix(M)
@@ -178,7 +178,7 @@ end
 	Output:
 		SparseMatrixCSC{Float64,Int64}
 """
-function getdFaceMassMatrix(M::AbstractMesh,v::Vector)
+function getdFaceMassMatrix(M::AbstractMesh,sigma::Vector,v::Vector)
 	Af    = getFaceAverageMatrix(M)
 	V     = getVolume(M)
 	Massf = sdiag(v)*Af'*V
@@ -220,7 +220,7 @@ end
 	Output:
 		SparseMatrixCSC{Float64,Int64}
 """
-function getdNodalMassMatrix(M::AbstractMesh,v::Vector)
+function getdNodalMassMatrix(M::AbstractMesh,sigma::Vector,v::Vector)
 	An  = getNodalAverageMatrix(M)
 	V   = getVolume(V)
 	dMn = spdiagm(v)*An'*V
